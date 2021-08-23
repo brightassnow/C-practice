@@ -1,17 +1,15 @@
 #pragma once
-#define ROW 3
-#define COL 3
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
-void IntiBoard(char board[ROW][COL], int row, int col);
-void DisplayBoard(char board[ROW][COL],int row,int col);
-void PlayerMove(char board[ROW][COL], int row, int col);
-void ComputerMove(char board[ROW][COL], int row, int col);
-//告诉我们四种游戏状态
-//玩家赢 '*’
-//电脑赢'#
-//平局’‘Q'
-//继续'C'
- char Iswin(char board[ROW][COL], int row, int col);
-   
+#define ROW 9 
+#define COL 9
+#define ROWS ROW+2
+#define COLS COL+2
+#define EASY_COUNT 10
+
+//初始化棋盘 
+void InitBoard(char board[ROWS][COLS], int row, int col,char set);
+void DisplayBoard(char board[ROWS][COLS], int row, int col);
+void SetMine(char mine[ROWS][COLS], int row, int col);
+void FindMine(char mine[ROWS][COLS], char show[ROWS][COLS], int row, int col);
