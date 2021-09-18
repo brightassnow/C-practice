@@ -1,43 +1,59 @@
-#include "game.h"
-#include <stdio.h>
-
+#define _CRT_SECURE_NO_WARNINGS
+#include "contact.h"
+#define MAX 1000
 void menu()
 {
-	printf("********************************************\n");
-	printf("*****     1.play         0.exit      *******\n");
-	printf("********************************************\n");
+
+	printf("*********************************************************\n");
+	printf("*********   1.add                 2.del *****************\n");
+	printf("*********   3.search              4.modify **************\n");
+	printf("*********   5.sort                6.print ***************\n");
+	printf("*********               0.exit              *************\n");
+	printf("*********************************************************\n");
 }
-void game()
+enum Option
 {
-	char mine[ROWS][COLS] = {0};//存放布置好的雷的信息
-	char show[ROWS][COLS] = {0};//存放排查出的雷的信息
-	InitBoard(mine, ROWS, COLS,'0');  //‘0’
-	InitBoard(show, ROWS, COLS,'*');  //‘*’
-	//打印棋盘
-	DisplayBoard(mine, ROW, COL);
-	DisplayBoard(show, ROW, COL);
-   //布置雷
-	SetMine(mine, ROW, COL);
-	DisplayBoard(mine, ROW, COL);
-	//排查雷
-	FindMine (mine,show, ROW, COL);
-} 
+	EXIT,
+    ADD,
+    DEL,
+    SEARCH,
+    MODIFY,
+    SORT,
+    PRINT
+};
 int main()
 {
 	int input = 0;
-	srand((unsigned int)time(NULL));
-	do
-	{
+	//创建通讯录
+	Contact con;//通讯录
+	InitContact(&con);//初始化通讯录
+	do {
 		menu();
-		printf("请选择：>");
-		scanf_s("%d", &input,1);
+		printf("请选择:>");
+		scanf("%d",&input);
 		switch (input)
 		{
-		case 1:
-			game();
+		case ADD:
+			//增加人的信息
+			AddContact(&con);
 			break;
-		case 0:
-			printf("退出游戏\n");
+		case DEL:
+			//删除
+			DelContact(&con);
+			break;
+		case SEARCH:
+			SearchContact(&con);
+			break;
+		case MODIFY:
+			ModifyContact(&con);
+			break;
+		case SORT:
+			break;
+		case PRINT:
+			PrintContact(&con);
+			break;
+		case EXIT:
+			printf("退出通讯录\n");
 			break;
 		default:
 			printf("选择错误，重新选择\n");
